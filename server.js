@@ -1,0 +1,39 @@
+////////////////////////////////
+// Import Dependencies      ////
+////////////////////////////////
+const express = require('express') 
+require('dotenv').config() 
+const path = require('path') 
+
+///////////////////////
+// Import Routers  ////
+///////////////////////
+
+
+//////////////////////////////////////////////////
+// Create the app object + set up view engine ////
+//////////////////////////////////////////////////
+const app = express() 
+
+///////////////////
+// Middleware  ////
+///////////////////
+
+///////////////
+// Routes  ////
+///////////////
+// basic home route
+app.get('/', (req, res) => {
+    res.send('the app is connected')
+})
+
+////////////////////////
+// Server Listener  ////
+////////////////////////
+const PORT = process.env.PORT
+
+app.listen(PORT, () => {
+    console.log('Your server is running, better go catch it!')
+})
+
+// End
