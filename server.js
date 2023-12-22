@@ -26,6 +26,9 @@ middleware(app)
 ///////////////
 // Routes  ////
 ///////////////
+app.get('/', (req, res) => {
+    res.render('home.ejs')
+})
 
 ////////////////////////
 // Server Listener  ////
