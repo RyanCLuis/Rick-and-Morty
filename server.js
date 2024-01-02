@@ -31,7 +31,15 @@ app.get('/', (req, res) => {
     const { username, loggedIn, userID } = req.session
     res.render('home.ejs', { username, loggedIn, userID })
 })
+
 app.use('/users', UserRouter)
+
+// error page
+app.get('/error', (req, res) => {
+    const error = req.query.error || 'Im Pickle Rick! Page Does Not Exist'
+    const { username, loggedIn, userId } = req.session
+    res.render('error.ejs', { error, userId, username, loggedIn })
+})
 
 ////////////////////////
 // Server Listener  ////

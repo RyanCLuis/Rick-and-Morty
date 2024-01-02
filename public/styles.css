@@ -1,5 +1,16 @@
 body {
-    background-color: lightpink;
+    background-image: url("/rickNMortyBackground.PNG");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+}
+
+.container-sm {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 50px;
 }
 
 .navbar-collapse {
