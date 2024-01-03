@@ -66,6 +66,32 @@ router.get('/favorites', (req, res) => {
         })
 })
 
+// UPDATE -> /character/update/:id
+router.put('/update/:id', (req, res) => {
+    const { username, loggedIn, userId } = req.session
+    const characterId = req.params.id
+    const theCharacter = req.body
+    delete theCharacter.owner
+    theCharacter.favorite = !!theCharacter.favorite
+    theCharacter.owner = userId
+    console.log('this is req.body: \n', theCharacter)
+    Character.findById(characterId)
+    .then(foundCharacter => {
+        if (foundCharacter.owner == userId) {
+            return foundCharacter.updateOne(theCharacter)
+        } else {
+            res.redirect(`/error?error=YOU%20CANT%20UPDATE%20THIS%20CHARACTER!`)
+        }
+    })
+    .then(returnedCharacter => {
+        res.redirect(`/character/favorites/${characterId}`)
+    })
+    .catch(err => {
+        console.log('error')
+        res.redirect(`/error?error=${err}`)
+    })
+})
+
 // DELETE -> /character/delete/:id
 router.delete('/delete/:id', (req, res) => {
     const { username, loggedIn, userId } = req.session
