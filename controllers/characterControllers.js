@@ -6,7 +6,7 @@ const axios = require('axios')
 const allCharactersUrl = process.env.CHARACTER_API_URL
 const idSearchBaseUrl = process.env.id_CHARACTER_BASE_URL
 const allEpisodesUrl = process.env.EPISODE_BASE_URL
-const idEpSearchBaseUrl = process.env.id_CHARACTER_BASE_URL
+const idEpSearchBaseUrl = process.env.id_EPISODE_BASE_UR
 
 /////////////////////
 // Create Router ////
@@ -17,7 +17,7 @@ const router = express.Router()
 // Routes & Controllers ////
 ////////////////////////////
 // GET -> /character
-router.get('/:page', (req, res) => {
+router.get('/all/:page', (req, res) => {
     const { username, loggedIn, userId } = req.session
     const page = req.params.page
     console.log('this is the req.params.page: ', allCharactersUrl + `?page=${page}`)
@@ -33,7 +33,21 @@ router.get('/:page', (req, res) => {
     })
 })
 
-// GET -> /characters/:id
+// GET -> /character/:id
+router.get('/:id', (req, res) => {
+    const { username, loggedIn, userId } = req.session
+    const characterId = req.params.id
+    console.log('asdasdasdasd', `${idSearchBaseUrl}${characterId}`)
+    axios(`${idSearchBaseUrl}${characterId}`)
+    .then(apiRes => {
+        console.log('This is apiRes.data: \n', apiRes.data)
+        res.send(apiRes.data)
+    })
+    .catch(err => {
+        console.log('error')
+        res.redirect(`/error?error=${err}`)
+    })
+})
 
 //////////////
 // Export ////

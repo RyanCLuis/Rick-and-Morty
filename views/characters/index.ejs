@@ -7,6 +7,7 @@
                 <img src="<%= c.image %>" alt="picture of person" class="card-img-top mt-3">
                 <div class="card-body">
                     <h5 class="card-title"><%= c.name %></h5>
+                    <a href="/character/<%= c.id %>" class="btn">Learn More</a>
                 </div>
             </div>
         <% }) %>
@@ -15,10 +16,10 @@
 
 <div class="text-center mt-3">
     <% if (page > 1) { %>
-        <a href="/character/<%= page - 1 %>" class="btn btn-primary me-2">Previous</a>
+        <a href="/character/all/<%= page - 1 %>" class="btn btn-primary me-2">Previous</a>
     <% } %>
     <% if (characters.length >= pageSize) { %>
-        <a href="/character/<%= parseInt(page) + 1 %>" class="btn btn-primary">Next</a>
+        <a href="/character/all/<%= parseInt(page) + 1 %>" class="btn btn-primary">Next</a>
     <% } %>
     </div>
 </div>
