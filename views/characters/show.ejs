@@ -1,0 +1,29 @@
+<%- include('../partials/header') %>
+
+<div class="container-md container-sm">
+    <div class="container center">
+        <h2><%= character.name %></h2>
+        <div class="container col">
+            <img src="<%= character.image %>" alt="picture of person" class="pictureOfPerson">
+        </div>
+        <table class="table table-striped mt-3">
+            <thead>
+                <tr>
+                    <th scope="col">Status:</th>
+                    <th scope="col">Species:</th>
+                    <th scope="col">Gender:</th>
+                    <th scope="col">Origin:</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td scope="row"><%= character.status %></td>
+                    <td scope="row"><%= character.species %></td>
+                    <td scope="row"><%= character.gender %></td>
+                    <td scope="row"><%= character.origin.name %></td>
+                </tr>
+            </tbody>
+        </table>        
+    </div>
+</div>
+<%- include('../partials/footer') %>

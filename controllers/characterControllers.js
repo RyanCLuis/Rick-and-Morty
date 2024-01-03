@@ -41,7 +41,9 @@ router.get('/:id', (req, res) => {
     axios(`${idSearchBaseUrl}${characterId}`)
     .then(apiRes => {
         console.log('This is apiRes.data: \n', apiRes.data)
-        res.send(apiRes.data)
+        const characterFound = apiRes.data
+        // res.send(characterFound)
+        res.render('characters/show', { character: characterFound, username, loggedIn, userId })
     })
     .catch(err => {
         console.log('error')
