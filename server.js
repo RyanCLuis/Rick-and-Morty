@@ -9,6 +9,7 @@ const middleware = require('./utils/middleware')
 // Import Routers  ////
 ///////////////////////
 const UserRouter = require('./controllers/userControllers')
+const CharacterRouter = require('./controllers/characterControllers')
 
 //////////////////////////////////////////////////
 // Create the app object + set up view engine ////
@@ -33,6 +34,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/users', UserRouter)
+app.use('/character', CharacterRouter)
 
 // error page
 app.get('/error', (req, res) => {

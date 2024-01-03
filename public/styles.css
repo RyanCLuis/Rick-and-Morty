@@ -1,9 +1,12 @@
 body {
     background-image: url("/rickNMortyBackground.PNG");
     background-position: center;
-    background-repeat: no-repeat;
     background-size: cover;
     height: 100vh;
+}
+
+.characterCard {
+    width: 30%;
 }
 
 .container-sm {
