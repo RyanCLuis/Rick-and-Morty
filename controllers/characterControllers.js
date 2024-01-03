@@ -20,7 +20,7 @@ const router = express.Router()
 router.get('/all/:page', (req, res) => {
     const { username, loggedIn, userId } = req.session
     const page = req.params.page
-    console.log('this is the req.params.page: ', allCharactersUrl + `?page=${page}`)
+    // console.log('this is the req.params.page: ', allCharactersUrl + `?page=${page}`)
     axios(allCharactersUrl + `?page=${page}`)
     .then(apiRes => {
         // console.log('this came back from the api: \n', apiRes.data)
@@ -66,6 +66,43 @@ router.get('/favorites', (req, res) => {
         })
 })
 
+// DELETE -> /character/delete/:id
+router.delete('/delete/:id', (req, res) => {
+    const { username, loggedIn, userId } = req.session
+    const characterId = req.params.id
+    Character.findById(characterId)
+        .then(character => {
+            if (character.owner == userId) {
+                return character.deleteOne()
+            } else {
+                res.redirect(`/error?error=YOU%20CANT%20DELETE%20THIS%20CHARACTER!`)
+            }
+        })
+        .then(deletedCharacter => {
+            console.log('this was returned from deleteOne: \n', deletedCharacter)
+            res.redirect('/character/favorites')
+        })
+        .catch(err => {
+            console.log('error')
+            res.redirect(`/error?error=${err}`)
+        })
+})
+
+// GET -> /favorites/:id
+router.get('/favorites/:id', (req, res) => {
+    const { username, loggedIn, userId } = req.session
+    Character.findById(req.params.id)
+        .then(theCharacter => {
+            // res.send(theCharacter)
+            res.render('characters/favoriteDetail', { character: theCharacter, username, loggedIn, userId })
+        })
+        .catch(err => {
+            console.log('error')
+            res.redirect(`/error?error=${err}`)
+        })
+})
+
+
 // GET -> /character/:id
 router.get('/:id', (req, res) => {
     const { username, loggedIn, userId } = req.session
@@ -74,6 +111,7 @@ router.get('/:id', (req, res) => {
     .then(apiRes => {
         // console.log('This is apiRes.data: \n', apiRes.data)
         const characterFound = apiRes.data
+        // console.log(characterFound)
         // res.send(characterFound)
         res.render('characters/show', { character: characterFound, username, loggedIn, userId })
     })

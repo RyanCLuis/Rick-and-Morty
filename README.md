@@ -18,12 +18,12 @@ As a user, I want the ability to...
 
 ## ERD
 
-![ERD](Public/ERD.PNG)
+![ERD](public/ERD.PNG)
 
  ## WireFrame
 
-![WireFrame1](Public/WireFramep1.PNG)
-![WireFrame2](Public/WireFramep2.PNG)
-![WireFrame3](Public/WireFramep3.PNG)
-![WireFrame4](Public/WireFramep4.PNG)
-![WireFrame5](Public/WireFramep5.PNG)
+![WireFrame1](public/WireFramep1.PNG)
+![WireFrame2](public/WireFramep2.PNG)
+![WireFrame3](public/WireFramep3.PNG)
+![WireFrame4](public/WireFramep4.PNG)
+![WireFrame5](public/WireFramep5.PNG)

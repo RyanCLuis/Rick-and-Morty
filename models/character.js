@@ -18,6 +18,7 @@ const characterSchema = new Schema({
     gender: { type: String, required: true },
     origin: { type: String, required: true },
     favorite: { type: Boolean, required: true },
+    image: { type: String, require: true },
     owner: {
         type: Schema.Types.ObjectId,
         ref: 'User',

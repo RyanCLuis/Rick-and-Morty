@@ -17,7 +17,7 @@
         <tbody>
             <% characters.forEach((c) => { %>
                 <tr>
-                    <td scope="row"><%= c.name %></td>
+                    <td scope="row"><a href="/character/favorites/<%= c._id %>"><%= c.name %></a></td>
                     <td scope="row"><%= c.status %></td>
                     <td scope="row"><%= c.species %></td>
                     <td scope="row"><%= c.gender %></td>

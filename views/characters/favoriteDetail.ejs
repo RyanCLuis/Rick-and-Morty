@@ -1,0 +1,61 @@
+<%- include('../partials/header') %>
+
+<div class="container center text-center">
+    <h2><%= character.name %></h2>
+    <img src="<%= character.image %>" alt="picture" class="container center mt-3 modelPicture">
+    <div class="container col" style="width: 18rem">
+    </div>
+    <table class="table table-striped mt-3">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Status</th>
+                <th scope="col">Species</th>
+                <th scope="col">Gender</th>
+                <th scope="col">Origin</th>
+                <th scope="col">Favorite?</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td scope="row"><a href="/character/favorites/<%= character._id %>"><%= character.name %></a></td>
+                <td scope="row"><%= character.status %></td>
+                <td scope="row"><%= character.species %></td>
+                <td scope="row"><%= character.gender %></td>
+                <td scope="row"><%= character.origin %></td>
+                <td scope="row"><%= character.favorite ? '✔️' : '❌' %></td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="btn-group">
+        <a href="/character/all/1" class="btn btn-warning me-3">Back to All Characters</a>
+        <form class="me-3" action="/character/delete/<%= character._id %>?_method=DELETE" method="POST">
+            <input type="submit" class="btn btn-danger" value="Delete this Favorite Character">
+        </form>
+    </div>
+    <% if (character.owner == userId) {%>
+        <hr>
+        <div class="container d-inline-flex justify-content-center">
+            <form class="me-3" action="/character/update/<%= character._id %>?_method=PUT" method="POST">
+                <fieldset>
+                    <input hidden type="text" name="id" value="<%= character.id %>">
+                    <input hidden type="text" name="name" value="<%= character.name %>">
+                    <input hidden type="text" name="status" value="<%= character.status %>">
+                    <input hidden type="text" name="species" value="<%= character.species %>">
+                    <input hidden type="text" name="gender" value="<%= character.gender %>">
+                    <input hidden type="text" name="origin" value="<%= character.origin.name %>">
+                    <input hidden type="text" name="image" value="<%= character.image %>">
+                    <label for="favorite">Favorite?</label>
+                    <input type="checkbox" name="favorite" checked>
+                    <input type="submit" class="btn btn-success" value="Update Favorite">
+                </fieldset>
+            </form>
+        </div>
+    <% } %>
+    </div>
+    <hr>
+</div>
+
+
+
+<%- include('../partials/footer') %>

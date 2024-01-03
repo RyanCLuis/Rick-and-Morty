@@ -28,3 +28,8 @@ body {
 .navbar-nav {
     margin-left: auto;
 }
+
+.modelPicture {
+    width: 50vh;
+    height: 50vh;
+}
