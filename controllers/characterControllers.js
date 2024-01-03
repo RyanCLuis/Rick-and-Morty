@@ -16,7 +16,7 @@ const router = express.Router()
 ////////////////////////////
 // Routes & Controllers ////
 ////////////////////////////
-// GET -> /character
+// GET -> /character/all/:page
 router.get('/all/:page', (req, res) => {
     const { username, loggedIn, userId } = req.session
     const page = req.params.page

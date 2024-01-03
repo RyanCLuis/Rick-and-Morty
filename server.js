@@ -10,6 +10,7 @@ const middleware = require('./utils/middleware')
 ///////////////////////
 const UserRouter = require('./controllers/userControllers')
 const CharacterRouter = require('./controllers/characterControllers')
+const EpisodeRouter = require('./controllers/episodeControllers')
 
 //////////////////////////////////////////////////
 // Create the app object + set up view engine ////
@@ -35,6 +36,7 @@ app.get('/', (req, res) => {
 
 app.use('/users', UserRouter)
 app.use('/character', CharacterRouter)
+app.use('/episodes', EpisodeRouter)
 
 // error page
 app.get('/error', (req, res) => {
