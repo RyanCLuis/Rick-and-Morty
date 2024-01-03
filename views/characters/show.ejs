@@ -23,8 +23,30 @@
                     <td scope="row"><%= character.origin.name %></td>
                 </tr>
             </tbody>
-        </table>        
+        </table>
+        <hr>
+        <% if (loggedIn) {%>
+            <h5>Add this to your facortites?</h5>
+            <form action="/character/add" method="POST">
+                <fieldset>
+                    <input hidden type="text" name="id" value="<%= character.id %>">
+                    <input hidden type="text" name="name" value="<%= character.name %>">
+                    <input hidden type="text" name="status" value="<%= character.status %>">
+                    <input hidden type="text" name="species" value="<%= character.species %>">
+                    <input hidden type="text" name="gender" value="<%= character.gender %>">
+                    <input hidden type="text" name="origin" value="<%= character.origin.name %>">
+                    <label for="favorite">Favorite?</label>
+                    <input type="checkbox" name="favorite" checked>
+                </fieldset>
+                <input type="submit" class="btn btn-success" value="Add Character">
+            </form>
+        <% } else {%>
+            <p>Log in to start saving characters!</p>
+        <% } %>
+        <hr>
     </div>
     <a href="/character/<%= character.episode %>" class="btn">Episodes</a>
+    <hr>
+    <a href="/character/all/1" class="btn btn-warning">Back to All Characters</a>
 </div>
 <%- include('../partials/footer') %>
