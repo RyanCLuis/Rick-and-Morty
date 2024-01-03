@@ -57,7 +57,8 @@ router.get('/favorites', (req, res) => {
     const { username, loggedIn, userId } = req.session
     Character.find({ owner: userId})
         .then(userCharacters => {
-            res.send(userCharacters)
+            // res.send(userCharacters)
+            res.render('characters/favorite', { characters: userCharacters, username, loggedIn, userId})
         })
         .catch(err => {
             console.log('error')

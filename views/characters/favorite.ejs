@@ -1,0 +1,32 @@
+<%- include('../partials/header') %>
+
+<div class="container center">
+    <h2>All <%= username %>'s Favorite Characters!</h2>
+    <hr>
+    <table class="table table-striped mt-3">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Status</th>
+                <th scope="col">Species</th>
+                <th scope="col">Gender</th>
+                <th scope="col">Origin</th>
+                <th scope="col">Favorite?</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% characters.forEach((c) => { %>
+                <tr>
+                    <td scope="row"><%= c.name %></td>
+                    <td scope="row"><%= c.status %></td>
+                    <td scope="row"><%= c.species %></td>
+                    <td scope="row"><%= c.gender %></td>
+                    <td scope="row"><%= c.origin %></td>
+                    <td scope="row"><%= c.favorite ? '✔️' : '❌' %></td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</div>
+
+<%- include('../partials/footer') %>
