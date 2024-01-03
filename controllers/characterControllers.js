@@ -37,10 +37,9 @@ router.get('/all/:page', (req, res) => {
 router.get('/:id', (req, res) => {
     const { username, loggedIn, userId } = req.session
     const characterId = req.params.id
-    console.log('asdasdasdasd', `${idSearchBaseUrl}${characterId}`)
     axios(`${idSearchBaseUrl}${characterId}`)
     .then(apiRes => {
-        console.log('This is apiRes.data: \n', apiRes.data)
+        // console.log('This is apiRes.data: \n', apiRes.data)
         const characterFound = apiRes.data
         // res.send(characterFound)
         res.render('characters/show', { character: characterFound, username, loggedIn, userId })

@@ -30,6 +30,23 @@ router.get('/all/:page', (req, res) => {
     })
 })
 
+// GET -> /episodes/:id
+router.get('/:id', (req, res) => {
+    const { username, loggedIn, userId } = req.session
+    const episodeId = req.params.id
+    axios(`${idEpSearchBaseUrl}${episodeId}`)
+    .then(apiRes => {
+        console.log('This is apiRes.data: \n', apiRes.data)
+        const episodeFound = apiRes.data
+        // res.send(episodeFound)
+        res.render('episodes/show', { episode: episodeFound, username, loggedIn, userId })
+    })
+    .catch(err => {
+        console.log('error')
+        res.redirect(`/error?error=${err}`)
+    })
+})
+
 
 //////////////
 // Export ////

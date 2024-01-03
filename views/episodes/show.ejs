@@ -1,0 +1,22 @@
+<%- include('../partials/header') %>
+
+<div class="container-md container-sm">
+    <div class="container center">
+        <h2><%= episode.name %></h2>
+        <table class="table table-striped mt-3">
+            <thead>
+                <tr>
+                    <th scope="col">Air-Date:</th>
+                    <th scope="col">Episode:</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td scope="row"><%= episode.air_date %></td>
+                    <td scope="row"><%= episode.episode %></td>
+                </tr>
+            </tbody>
+        </table>        
+    </div>
+</div>
+<%- include('../partials/footer') %>
