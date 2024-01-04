@@ -7,7 +7,8 @@ const Character = require('../models/character')
 const allCharactersUrl = process.env.CHARACTER_API_URL
 const idSearchBaseUrl = process.env.id_CHARACTER_BASE_URL
 const allEpisodesUrl = process.env.EPISODE_BASE_URL
-const idEpSearchBaseUrl = process.env.id_EPISODE_BASE_UR
+const idEpSearchBaseUrl = process.env.id_EPISODE_BASE_URL
+
 /////////////////////
 // Create Router ////
 /////////////////////

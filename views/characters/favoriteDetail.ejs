@@ -27,32 +27,34 @@
             </tr>
         </tbody>
     </table>
-    <hr>
-    <div class="container">
-        <form action="/character/update/<%= character._id %>?_method=PUT" method="POST">
-            <fieldset>
-                <input hidden type="text" name="id" value="<%= character.id %>">
-                <input hidden type="text" name="name" value="<%= character.name %>">
-                <input hidden type="text" name="status" value="<%= character.status %>">
-                <input hidden type="text" name="species" value="<%= character.species %>">
-                <input hidden type="text" name="gender" value="<%= character.gender %>">
-                <input hidden type="text" name="origin" value="<%= character.origin.name %>">
-                <input hidden type="text" name="image" value="<%= character.image %>">
-                <label for="favorite">Favorite?</label>
-                <input type="checkbox" name="favorite" <%= character.favorite ? 'checked' : '' %>>
-            </fieldset>
-            <input type="submit" class="btn btn-success" value="Update Favorite Character">
-        </form>
-    </div>
-    <hr>
-    <div class="btn-group">
-        <a href="/character/all/1" class="btn btn-warning me-3">Back to All Characters</a>
+    <% if (character.owner == userId) { %>
+        <hr>
+        <div class="container mb-3">
+            <form class="me-3" action="/character/update/<%= character._id %>?_method=PUT" method="POST">
+                <fieldset>
+                    <input hidden type="text" name="id" value="<%= character.id %>">
+                    <input hidden type="text" name="name" value="<%= character.name %>">
+                    <input hidden type="text" name="status" value="<%= character.status %>">
+                    <input hidden type="text" name="species" value="<%= character.species %>">
+                    <input hidden type="text" name="gender" value="<%= character.gender %>">
+                    <input hidden type="text" name="origin" value="<%= character.origin.name %>">
+                    <input hidden type="text" name="image" value="<%= character.image %>">
+                    <label for="favorite">Favorite?</label>
+                    <input type="checkbox" name="favorite" <%= character.favorite ? 'checked' : '' %>>
+                </fieldset>
+                <input type="submit" class="btn btn-success" value="Update Favorite Character">
+            </form>
+        </div>
         <form class="me-3" action="/character/delete/<%= character._id %>?_method=DELETE" method="POST">
             <input type="submit" class="btn btn-danger" value="Delete this Favorite Character">
         </form>
+        <% } %>
+        <hr>
+        <div class="btn-group">
+            <a href="/character/all/1" class="btn btn-warning me-3">Back to All Characters</a>
+        </div>
     </div>
-</div>
-
-
-
-<%- include('../partials/footer') %>
+    
+    
+    
+    <%- include('../partials/footer') %>
