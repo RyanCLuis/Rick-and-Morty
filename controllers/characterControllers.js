@@ -134,14 +134,15 @@ router.get('/favorites/:id', (req, res) => {
 router.get('/:id', (req, res) => {
     const { username, loggedIn, userId } = req.session
     const characterId = req.params.id
+    // console.log('this is charaacter id: \n', characterId)
     episodeRes = []
     axios(`${idSearchBaseUrl}${characterId}`)
     .then(apiRes => {
         // console.log('This is apiRes.data: \n', apiRes.data)
-        const characterFound = apiRes.data
+        const characterFound = apiRes.data 
         let allEpCharacterIn = characterFound.episode
         const episodes = characterFound.episode.map(ep => (ep.substr(-2,2).replace('/', '')))
-        console.log('this is the episodes: \n', episodes)
+        // console.log('this is the episodes: \n', episodes)
         // res.send(characterFound)
         res.render('characters/show', { character: characterFound, episodes, username, loggedIn, userId })
     })

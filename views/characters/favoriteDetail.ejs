@@ -53,8 +53,35 @@
         <div class="btn-group">
             <a href="/character/all/1" class="btn btn-warning me-3">Back to All Characters</a>
         </div>
+        <hr>
+        <br><br><h2>Reviews</h2>
+        <form id="add-review-form" method="POST"
+            action="/character/<%= character._id %>/reviews">
+                <label>Review:</label>
+                <textarea name="content"></textarea>
+            </select>
+            <input type="submit" value="Add Review">
+        </form>
+        <% if (character.reviews.length) { %>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Review</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% character.reviews.forEach(function(r) { %>
+                        <tr>
+                            <td><%= r.createdAt.toLocaleDateString() %></td>
+                            <td><%= r.content %></td>
+                        </tr>
+        <% }); %>
+                </tbody>
+            </table>
+        <% } else { %>
+            <h5>No Reviews Yet</h5>
+        <% } %>
     </div>
-    
-    
     
     <%- include('../partials/footer') %>

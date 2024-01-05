@@ -10,6 +10,20 @@ const { Schema, model } = mongoose
 /////////////////////////
 // Schema definition ////
 /////////////////////////
+const reviewSchema = new Schema({
+    content: {
+        type: String,
+        required: true
+    },
+    owner: {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+        required: true
+    }
+}, {
+    timestamps: true
+})
+
 const characterSchema = new Schema({
     id: { type: String, required: true },
     name: { type: String, required: true },
@@ -23,7 +37,8 @@ const characterSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'User',
         required: true
-    }
+    },
+    reviews: [reviewSchema]
 }, {
     timestamps: true
 })
