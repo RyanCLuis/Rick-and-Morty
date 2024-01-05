@@ -22,7 +22,7 @@
         <h3>Characters:</h3>
         <ul>
             <% characters.forEach(c => { %>
-                <a href="/character/<%= c %>"><%= c %></a>
+                <a href="/character/<%= c.id %>"><%= c.name %></a>
             <% }) %>
         </ul>
     </div>        

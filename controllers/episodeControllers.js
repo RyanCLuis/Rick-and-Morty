@@ -31,25 +31,28 @@ router.get('/all/:page', (req, res) => {
 })
 
 // GET -> /episodes/:id
-router.get('/:id', (req, res) => {
+router.get('/:id', async (req, res) => {
+    try{
     const { username, loggedIn, userId } = req.session
     const episodeId = req.params.id
-    characterRes = []
-    axios(`${idEpSearchBaseUrl}${episodeId}`)
-    .then(apiRes => {
-        console.log('This is apiRes.data: \n', apiRes.data)
-        const episodeFound = apiRes.data
-        let allChEpisodeIn = episodeFound.characters
-        console.log('this is all characters found: \n', allChEpisodeIn)
-        const characters = episodeFound.characters.map(ch => (ch.substr(-3,3).replace('/', '').replace('r', '')))
-        console.log(characters)
-        // res.send(episodeFound)
-        res.render('episodes/show', { episode: episodeFound, characters, username, loggedIn, userId })
-    })
-    .catch(err => {
+    const episode = await axios.get(`${idEpSearchBaseUrl}${episodeId}`)
+    console.log('This is apiRes.data: \n', episode.data)
+    console.log('This is episode: \n', episode)
+    // const episodeFound = apiRes.data
+    // const characters = episodeFound.characters.map(ch => (ch.substr(-3,3).replace('/', '').replace('r', '')))
+    const characters = await Promise.all(episode.data.characters.map((ch) => (
+        axios(ch))
+        .then(res => {
+            // console.log(res.data)
+        return res.data
+        })))
+    console.log(characters)
+    // res.send(episodeFound)
+    res.render('episodes/show', { episode, characters, username, loggedIn, userId })
+        } catch(err) {
         console.log('error')
         res.redirect(`/error?error=${err}`)
-    })
+    }
 })
 
 
