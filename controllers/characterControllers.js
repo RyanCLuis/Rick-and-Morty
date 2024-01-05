@@ -142,7 +142,6 @@ router.get('/:id', (req, res) => {
         let allEpCharacterIn = characterFound.episode
         const episodes = characterFound.episode.map(ep => (ep.substr(-2,2).replace('/', '')))
         console.log('this is the episodes: \n', episodes)
-        console.log(characterFound)
         // res.send(characterFound)
         res.render('characters/show', { character: characterFound, episodes, username, loggedIn, userId })
     })

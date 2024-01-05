@@ -34,12 +34,17 @@ router.get('/all/:page', (req, res) => {
 router.get('/:id', (req, res) => {
     const { username, loggedIn, userId } = req.session
     const episodeId = req.params.id
+    characterRes = []
     axios(`${idEpSearchBaseUrl}${episodeId}`)
     .then(apiRes => {
         console.log('This is apiRes.data: \n', apiRes.data)
         const episodeFound = apiRes.data
+        let allChEpisodeIn = episodeFound.characters
+        console.log('this is all characters found: \n', allChEpisodeIn)
+        const characters = episodeFound.characters.map(ch => (ch.substr(-3,3).replace('/', '').replace('r', '')))
+        console.log(characters)
         // res.send(episodeFound)
-        res.render('episodes/show', { episode: episodeFound, username, loggedIn, userId })
+        res.render('episodes/show', { episode: episodeFound, characters, username, loggedIn, userId })
     })
     .catch(err => {
         console.log('error')

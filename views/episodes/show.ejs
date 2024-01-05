@@ -18,6 +18,13 @@
             </tbody>
         </table>        
     </div>
-
+    <div class="container">
+        <h3>Characters:</h3>
+        <ul>
+            <% characters.forEach(c => { %>
+                <a href="/character/<%= c %>"><%= c %></a>
+            <% }) %>
+        </ul>
+    </div>        
 </div>
 <%- include('../partials/footer') %>
