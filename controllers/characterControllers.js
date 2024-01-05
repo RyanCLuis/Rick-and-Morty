@@ -57,14 +57,14 @@ router.post('/add', (req, res) => {
 router.get('/favorites', (req, res) => {
     const { username, loggedIn, userId } = req.session
     Character.find({ owner: userId})
-        .then(userCharacters => {
-            // res.send(userCharacters)
-            res.render('characters/favorite', { characters: userCharacters, username, loggedIn, userId})
-        })
-        .catch(err => {
-            console.log('error')
-            res.redirect(`/error?error=${err}`)
-        })
+    .then(userCharacters => {
+        // res.send(userCharacters)
+        res.render('characters/favorite', { characters: userCharacters, username, loggedIn, userId})
+    })
+    .catch(err => {
+        console.log('error')
+        res.redirect(`/error?error=${err}`)
+    })
 })
 
 // UPDATE -> /character/update/:id
@@ -134,13 +134,17 @@ router.get('/favorites/:id', (req, res) => {
 router.get('/:id', (req, res) => {
     const { username, loggedIn, userId } = req.session
     const characterId = req.params.id
+    episodeRes = []
     axios(`${idSearchBaseUrl}${characterId}`)
     .then(apiRes => {
         // console.log('This is apiRes.data: \n', apiRes.data)
         const characterFound = apiRes.data
-        // console.log(characterFound)
+        let allEpCharacterIn = characterFound.episode
+        const episodes = characterFound.episode.map(ep => (ep.substr(-2,2).replace('/', '')))
+        console.log('this is the episodes: \n', episodes)
+        console.log(characterFound)
         // res.send(characterFound)
-        res.render('characters/show', { character: characterFound, username, loggedIn, userId })
+        res.render('characters/show', { character: characterFound, episodes, username, loggedIn, userId })
     })
     .catch(err => {
         console.log('error')
