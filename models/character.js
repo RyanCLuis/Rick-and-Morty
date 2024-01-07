@@ -47,8 +47,9 @@ const characterSchema = new Schema({
 // create user model ////
 /////////////////////////
 const Character = model('Character', characterSchema)
+const Review = model('Review', reviewSchema)
 
 /////////////////////////
 // export user model ////
 /////////////////////////
-module.exports = Character
+module.exports = {Character, Review}

@@ -3,7 +3,7 @@
 ///////////////////////////
 const express = require('express')
 const axios = require('axios')
-const Character = require('../models/character')
+const {Character} = require('../models/character')
 const allCharactersUrl = process.env.CHARACTER_API_URL
 const idSearchBaseUrl = process.env.id_CHARACTER_BASE_URL
 const allEpisodesUrl = process.env.EPISODE_BASE_URL
@@ -21,10 +21,8 @@ const router = express.Router()
 router.get('/all/:page', (req, res) => {
     const { username, loggedIn, userId } = req.session
     const page = req.params.page
-    // console.log('this is the req.params.page: ', allCharactersUrl + `?page=${page}`)
     axios(allCharactersUrl + `?page=${page}`)
     .then(apiRes => {
-        // console.log('this came back from the api: \n', apiRes.data)
         const pageSize = 20
         res.render('characters/index', { characters: apiRes.data.results, username, userId, loggedIn, page, pageSize})
     })
@@ -42,7 +40,6 @@ router.post('/add', (req, res) => {
     const characterId = req.params.id
     theCharacter.owner = userId
     theCharacter.favorite = !!theCharacter.favorite
-    // res.send(theCharacter)
     Character.create(theCharacter)
     .then(newCharacter => {
         res.redirect(`/character/favorites`)
@@ -58,7 +55,6 @@ router.get('/favorites', (req, res) => {
     const { username, loggedIn, userId } = req.session
     Character.find({ owner: userId})
     .then(userCharacters => {
-        // res.send(userCharacters)
         res.render('characters/favorite', { characters: userCharacters, username, loggedIn, userId})
     })
     .catch(err => {
@@ -75,7 +71,6 @@ router.put('/update/:id', (req, res) => {
     delete theCharacter.owner
     theCharacter.favorite = !!theCharacter.favorite
     theCharacter.owner = userId
-    console.log('this is req.body: \n', theCharacter)
     Character.findById(characterId)
     .then(foundCharacter => {
         if (foundCharacter.owner == userId) {
@@ -106,7 +101,6 @@ router.delete('/delete/:id', (req, res) => {
             }
         })
         .then(deletedCharacter => {
-            console.log('this was returned from deleteOne: \n', deletedCharacter)
             res.redirect('/character/favorites')
         })
         .catch(err => {
@@ -120,7 +114,6 @@ router.get('/favorites/:id', (req, res) => {
     const { username, loggedIn, userId } = req.session
     Character.findById(req.params.id)
         .then(theCharacter => {
-            // res.send(theCharacter)
             res.render('characters/favoriteDetail', { character: theCharacter, username, loggedIn, userId })
         })
         .catch(err => {
@@ -134,16 +127,12 @@ router.get('/favorites/:id', (req, res) => {
 router.get('/:id', (req, res) => {
     const { username, loggedIn, userId } = req.session
     const characterId = req.params.id
-    // console.log('this is charaacter id: \n', characterId)
     episodeRes = []
     axios(`${idSearchBaseUrl}${characterId}`)
     .then(apiRes => {
-        // console.log('This is apiRes.data: \n', apiRes.data)
         const characterFound = apiRes.data 
         let allEpCharacterIn = characterFound.episode
         const episodes = characterFound.episode.map(ep => (ep.substr(-2,2).replace('/', '')))
-        // console.log('this is the episodes: \n', episodes)
-        // res.send(characterFound)
         res.render('characters/show', { character: characterFound, episodes, username, loggedIn, userId })
     })
     .catch(err => {

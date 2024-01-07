@@ -20,7 +20,6 @@ router.get('/all/:page', (req, res) => {
     const page = req.params.page
     axios(allEpisodesUrl + `?page=${page}`)
     .then(apiRes => {
-        console.log('this came back from the api: \n', apiRes.data)
         const pageSize = 20
         res.render('episodes/index', { episodes: apiRes.data.results, username, userId, loggedIn, page, pageSize})
     })
@@ -37,19 +36,11 @@ router.get('/:id', async (req, res) => {
     const episodeId = req.params.id
     const episodeAxios = await axios.get(`${idEpSearchBaseUrl}${episodeId}`)
     const episode = episodeAxios.data
-    console.log('this is the episode: \n', episode)
-    // console.log('This is apiRes.data: \n', episode.data)
-    // console.log('This is episode: \n', episode)
-    // const episodeFound = apiRes.data
-    // const characters = episodeFound.characters.map(ch => (ch.substr(-3,3).replace('/', '').replace('r', '')))
     const characters = await Promise.all(episode.characters.map((ch) => (
         axios(ch))
         .then(res => {
-            // console.log(res.data)
         return res.data
         })))
-    // console.log(characters)
-    // res.send(episodeFound)
     res.render('episodes/show', { episode, characters, username, loggedIn, userId })
         } catch(err) {
         console.log('error')
