@@ -1,6 +1,6 @@
 <%- include('../partials/header') %>
 
-<div class="container center text-center">
+<div class="container center text-center center-content container-sm">
     <h2><%= character.name %></h2>
     <img src="<%= character.image %>" alt="picture" class="container center mt-3 modelPicture">
     <div class="container col" style="width: 18rem">
@@ -68,19 +68,21 @@
                     <tr>
                         <th>Date</th>
                         <th>Review</th>
+                        <th>Delete?</th>
                     </tr>
                 </thead>
                 <tbody>
                     <% character.reviews.forEach(function(r) { %>
-                        <li>
-                            <form action="/character/<%= r.id %>/<%= character._id %>/reviews?_method=DELETE"
-                                class="delete-form" method="POST">
-                                <button type="submit">X</button>
-                    <% }) %>
-                    <% character.reviews.forEach(function(r) { %>
-                        <tr>
-                            <td><%= r.createdAt.toLocaleDateString() %></td>
-                            <td><%= r.content %></td>
+                        <% }) %>
+                        <% character.reviews.forEach(function(r) { %>
+                            <tr>
+                                <td><%= r.createdAt.toLocaleDateString() %></td>
+                                <td><%= r.content %></td>
+                                <td>
+                                    <form action="/character/<%= r.id %>/<%= character._id %>/reviews?_method=DELETE"
+                                        class="delete-form" method="POST">
+                                        <button type="submit">X</button>
+                            </td>
                         </tr>
         <% }) %>
                 </tbody>
