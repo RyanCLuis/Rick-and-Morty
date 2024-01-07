@@ -122,23 +122,22 @@ router.get('/favorites/:id', (req, res) => {
         })
 })
 
-
-// GET -> /character/:id
-router.get('/:id', (req, res) => {
+router.get('/:id', async (req, res) => {
+    try{
     const { username, loggedIn, userId } = req.session
     const characterId = req.params.id
-    episodeRes = []
-    axios(`${idSearchBaseUrl}${characterId}`)
-    .then(apiRes => {
-        const characterFound = apiRes.data 
-        let allEpCharacterIn = characterFound.episode
-        const episodes = characterFound.episode.map(ep => (ep.substr(-2,2).replace('/', '')))
-        res.render('characters/show', { character: characterFound, episodes, username, loggedIn, userId })
-    })
-    .catch(err => {
+    const characterAxios = await axios.get(`${idSearchBaseUrl}${characterId}`)
+    const character = characterAxios.data
+    const episodes = await Promise.all(character.episode.map((ep) => (
+        axios(ep))
+        .then(res => {
+        return res.data
+        })))
+    res.render('characters/show', { character, episodes, username, loggedIn, userId })
+        } catch(err) {
         console.log('error')
         res.redirect(`/error?error=${err}`)
-    })
+    }
 })
 
 //////////////
