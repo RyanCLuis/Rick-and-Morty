@@ -72,8 +72,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <% character.reviews.forEach(function(r) { %>
-                        <% }) %>
                         <% character.reviews.forEach(function(r) { %>
                             <tr>
                                 <td><%= r.createdAt.toLocaleDateString() %></td>
@@ -82,6 +80,7 @@
                                     <form action="/character/<%= r.id %>/<%= character._id %>/reviews?_method=DELETE"
                                         class="delete-form" method="POST">
                                         <button type="submit">X</button>
+                                    </form>
                             </td>
                         </tr>
         <% }) %>
