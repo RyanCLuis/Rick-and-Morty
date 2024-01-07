@@ -27,3 +27,8 @@ As a user, I want the ability to...
 ![WireFrame3](public/WireFramep3.PNG)
 ![WireFrame4](public/WireFramep4.PNG)
 ![WireFrame5](public/WireFramep5.PNG)
+
+## Furture Updates
+
+- Add a search bar function
+- Add another API to get images for episode index

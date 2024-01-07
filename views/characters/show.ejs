@@ -1,7 +1,7 @@
 <%- include('../partials/header') %>
 
 <div class="container-md container-sm">
-    <div class="container center">
+    <div class="container text-center">
         <h2><%= character.name %></h2>
         <div class="container col">
             <img src="<%= character.image %>" alt="picture of person" class="pictureOfPerson">
@@ -25,9 +25,9 @@
             </tbody>
         </table>
         <hr>
-        <div class="container">
+        <div class="text-center">
             <h3>Episodes:</h3>
-            <ul>
+            <ul class="list">
                 <% episodes.forEach(e => { %>
                     <a href="/episodes/<%= e.id %>"><%= e.name %></a>
                 <% }) %>
@@ -35,7 +35,7 @@
         </div>        
         <hr>
         <% if (loggedIn) {%>
-            <h5>Add this to your facortites?</h5>
+            <h5>Add this to your favorites?</h5>
             <form action="/character/add" method="POST">
                 <fieldset>
                     <input hidden type="text" name="id" value="<%= character.id %>">
@@ -48,13 +48,16 @@
                     <label for="favorite">Favorite?</label>
                     <input type="checkbox" name="favorite" checked>
                 </fieldset>
-                <input type="submit" class="btn btn-success" value="Add Character">
+                <input type="submit" class="btn btn-success" value="Add to Save">
             </form>
         <% } else {%>
             <p>Log in to start saving characters!</p>
         <% } %>
         <hr>
     </div>
-        <a href="/character/all/1" class="btn btn-warning">Back to All Characters</a>
+    <div class="text-center">
+        <a href="/character/all/1" class="btn btn-warning btn-sm">Back to All Characters</a>
+    </div>
 </div>
+
 <%- include('../partials/footer') %>
