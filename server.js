@@ -53,7 +53,7 @@ app.get('/error', (req, res) => {
 const PORT = process.env.PORT
 
 app.listen(PORT, () => {
-    console.log('Your server is running, better go catch it')
+    console.log('Lets Go Morty!')
 })
 
 // End
