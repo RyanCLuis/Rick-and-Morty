@@ -23,12 +23,35 @@ As a user, I want the ability to...
  ## WireFrame
 
 ![WireFrame1](public/WireFramep1.PNG)
+
 ![WireFrame2](public/WireFramep2.PNG)
+
 ![WireFrame3](public/WireFramep3.PNG)
+
 ![WireFrame4](public/WireFramep4.PNG)
+
 ![WireFrame5](public/WireFramep5.PNG)
 
 ## Furture Updates
 
 - Add a search bar function
 - Add another API to get images for episode index
+
+## Technologies Used
+- Ejs 
+- JavaScript 
+- CSS 
+- https://rickandmortyapi.com/documentation/
+
+# Website
+https://rickandmorty-ga.fly.dev
+
+## ScreenShots
+
+![Home](public/FinishedOne.PNG)
+
+![Index](public/FinishedTwo.PNG)
+
+![CharDetails](public/FinishedFour.PNG)
+
+![SignUp](public/FinishedFive.PNG)
